@@ -10,7 +10,7 @@ class UserSelectionButton extends StatelessWidget {
     return ElevatedButton(
       child: SizedBox(
         width: 300,
-        height: 50,
+        height: 60,
         child: Align(
           child: Text(
             title,

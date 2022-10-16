@@ -18,14 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const UserSelectionButton(
+          children: const [
+            UserSelectionButton(
               title: "Profissional",
             ),
             SizedBox(height: 30),
-            ElevatedButton(
-              child: const Text("Paciente"),
-              onPressed: () => {},
+            UserSelectionButton(
+              title: "Paciente",
             ),
           ],
         ),
