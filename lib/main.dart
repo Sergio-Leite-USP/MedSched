@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import './screens/home_screen.dart';
+import './screens/home_pacientes_screen.dart';
 
 void main() => runApp(const MedSchedApp());
 
@@ -20,6 +21,7 @@ class _MedSchedAppState extends State<MedSchedApp> {
       routes: {
         "/": (context) => const HomeScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
+        HomePacientesScreen.routeName: (context) => const HomePacientesScreen(),
       },
     );
   }

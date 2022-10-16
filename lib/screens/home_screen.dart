@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './home_pacientes_screen.dart';
 import '../widgets/user_selection_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,10 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
           children: const [
             UserSelectionButton(
               title: "Profissional",
+              targetRouteName: "não existe",
             ),
             SizedBox(height: 30),
             UserSelectionButton(
               title: "Paciente",
+              targetRouteName: HomePacientesScreen.routeName,
             ),
           ],
         ),

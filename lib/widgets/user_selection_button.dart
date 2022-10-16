@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class UserSelectionButton extends StatelessWidget {
-  const UserSelectionButton({required this.title});
-
   final String title;
+  final String targetRouteName;
+
+  const UserSelectionButton({
+    required this.title,
+    required this.targetRouteName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class UserSelectionButton extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => {},
+      onPressed: () => Navigator.of(context).pushNamed(targetRouteName),
     );
   }
 }
