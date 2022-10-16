@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/user_selection_button.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
   static const routeName = "/home";
@@ -12,9 +14,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("MedSched App")),
-      body: const Center(
-        child: Text("Hello World Melhorado"),
+      appBar: AppBar(title: const Text("MedSched App")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const UserSelectionButton(
+              title: "Profissional",
+            ),
+            SizedBox(height: 30),
+            ElevatedButton(
+              child: const Text("Paciente"),
+              onPressed: () => {},
+            ),
+          ],
+        ),
       ),
     );
   }
