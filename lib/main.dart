@@ -16,6 +16,7 @@ class _MedSchedAppState extends State<MedSchedApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "MedSched App",
       initialRoute: "/",
       routes: {
