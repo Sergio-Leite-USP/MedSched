@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:medsched/dummy_data.dart';
-import 'package:medsched/widgets/medico_card_item.dart';
+
+import '../dummy_data.dart';
+
+import '../widgets/medico_card_item.dart';
+import '../widgets/filter_dialog.dart';
 
 class HomePacientesScreen extends StatefulWidget {
   const HomePacientesScreen({Key? key}) : super(key: key);
@@ -11,33 +14,14 @@ class HomePacientesScreen extends StatefulWidget {
 }
 
 class _HomePacientesScreenState extends State<HomePacientesScreen> {
-  Future<String?> _showFilterDialog() async {
-    return showDialog<String>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                // The parameter in .pop() is the result returned by the Future
-                Navigator.of(context).pop("oi");
-              },
-            ),
-          ],
-        );
-      },
-    );
+  //Considere otimizar tudo isso aqui...
+  List<MedicoCardItem> medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList();
+  void filtrarPorEspecialidade(String filtro) {
+    setState(() {
+      medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList();
+      if (filtro == "Todas") return;
+      medicosFiltrados = medicosFiltrados.where((m) => m.especialidade == filtro).toList();
+    });
   }
 
   @override
@@ -52,17 +36,22 @@ class _HomePacientesScreenState extends State<HomePacientesScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              // _showFilterDialog() gets executed and it's value is THEN stored in 'future' variable
-              Future<String?> future = _showFilterDialog();
-              future.then((value) => print(value));
+              // _showFilterDialog() gets executed and it's value is THEN stored in 'dialogFuture' variable
+              Future<String?> dialogFuture = showFilterDialog(context);
+              dialogFuture.then((value) => filtrarPorEspecialidade(value!)); // possível erro ao ignorar null Safety
             },
           )
         ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(10),
-        children: DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList(),
+        children: medicosFiltrados,
       ),
     );
   }
 }
+
+//TODO: 
+//Buscar e filtrar por nome do médico
+//Todo médico deve ter uma agenda.
+//Clicar no médico deve levar para uma página da agenda daquele médico específico.
