@@ -16,6 +16,8 @@ class HomePacientesScreen extends StatefulWidget {
 class _HomePacientesScreenState extends State<HomePacientesScreen> {
   //Considere otimizar tudo isso aqui...
   List<MedicoCardItem> medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList();
+  String? filtroAtual;
+
   void filtrarPorEspecialidade(String filtro) {
     setState(() {
       medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList();
@@ -37,8 +39,11 @@ class _HomePacientesScreenState extends State<HomePacientesScreen> {
             ),
             onPressed: () {
               // _showFilterDialog() gets executed and it's value is THEN stored in 'dialogFuture' variable
-              Future<String?> dialogFuture = showFilterDialog(context);
-              dialogFuture.then((value) => filtrarPorEspecialidade(value!)); // possível erro ao ignorar null Safety
+              Future<String?> dialogFuture = showFilterDialog(context, filtroAtual: filtroAtual);
+              dialogFuture.then((value) {
+                filtrarPorEspecialidade(value!);
+                filtroAtual = value;
+              }); // possível erro ao ignorar null Safety
             },
           )
         ],

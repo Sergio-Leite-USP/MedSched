@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../dummy_data.dart';
 
-Future<String?> showFilterDialog(BuildContext context) async {
+Future<String?> showFilterDialog(BuildContext context, {String? filtroAtual}) async {
   List<String> especialidades = [
     "Todas"
   ];
@@ -10,7 +10,7 @@ Future<String?> showFilterDialog(BuildContext context) async {
     if (!especialidades.contains(m.especialidade)) especialidades.add(m.especialidade);
   }
 
-  String _dropdownValue = especialidades[0];
+  String _dropdownValue = filtroAtual ?? especialidades[0];
   return showDialog<String>(
     context: context,
     barrierDismissible: false, // user must tap button!
