@@ -22,11 +22,12 @@ Future<String?> showFilterDialog(BuildContext context, {String? filtroAtual}) as
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("Especialidade"),
                     DropdownButton(
-                      alignment: Alignment.centerRight,
+                      alignment: Alignment.centerLeft,
                       value: _dropdownValue,
                       items: especialidades.map((e) => DropdownMenuItem(child: Text(e), value: e)).toList(),
                       onChanged: (String? value) {

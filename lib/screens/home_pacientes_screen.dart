@@ -15,12 +15,12 @@ class HomePacientesScreen extends StatefulWidget {
 
 class _HomePacientesScreenState extends State<HomePacientesScreen> {
   //Considere otimizar tudo isso aqui...
-  List<MedicoCardItem> medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList();
+  List<MedicoCardItem> medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(medico: m)).toList();
   String? filtroAtual;
 
   void filtrarPorEspecialidade(String filtro) {
     setState(() {
-      medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(id: m.id, nome: m.nome, especialidade: m.especialidade)).toList();
+      medicosFiltrados = DUMMY_MEDICOS.map((m) => MedicoCardItem(medico: m)).toList();
       if (filtro == "Todas") return;
       medicosFiltrados = medicosFiltrados.where((m) => m.especialidade == filtro).toList();
     });
